@@ -62,6 +62,14 @@ Open http://localhost:3000
 - `npm run build` – Clean and build optimized assets into `docs/`
 - `npm start` – Alias of `dev`
 
+## Screenshots
+
+![Main](./src/img/screenshots/localhost_3003_%20%282%29.png)
+
+![Booking](./src/img/screenshots/localhost_3003_pages_booking.html.png)
+
+![Photo](./src/img/screenshots/localhost_3003_pages_photo.html.png)
+
 ---
 
 <div align="center">
