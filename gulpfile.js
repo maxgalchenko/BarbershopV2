@@ -1,37 +1,37 @@
-const { watch, src, dest, series, parallel } = require("gulp");
-const browserSync = require("browser-sync").create();
-const uglify = require("gulp-uglify");
-const rename = require("gulp-rename");
-const del = require("del");
-const postcss = require("gulp-postcss");
-const sass = require("gulp-sass");
-const autoprefixer = require("autoprefixer");
-const cssnano = require("cssnano");
-const webpackStream = require("webpack-stream");
-const htmlmin = require("gulp-htmlmin");
-const imagemin = require("gulp-imagemin");
-const webp = require("imagemin-webp");
-const extReplace = require("gulp-ext-replace");
-const concat = require("gulp-concat");
+const { watch, src, dest, series, parallel } = require('gulp');
+const browserSync = require('browser-sync').create();
+const uglify = require('gulp-uglify');
+const rename = require('gulp-rename');
+const del = require('del');
+const postcss = require('gulp-postcss');
+const sass = require('gulp-sass')(require('sass'));
+const autoprefixer = require('autoprefixer');
+const cssnano = require('cssnano');
+const webpackStream = require('webpack-stream');
+const htmlmin = require('gulp-htmlmin');
+const imagemin = require('gulp-imagemin');
+const webp = require('imagemin-webp');
+const extReplace = require('gulp-ext-replace');
+const concat = require('gulp-concat');
 
 const CONFIG = {
   src: {
-    js: ["./src/js/**/*.js"],
-    sass: "./src/sass/**/*.scss",
-    images: "./src/img/**/*.*",
-    html: "./src/**/*.html",
-    pngJpeg: "./src/img/*.{jpg,png}"
+    js: ['./src/js/**/*.js'],
+    sass: './src/sass/**/*.scss',
+    images: './src/img/**/*.*',
+    html: './src/**/*.html',
+    pngJpeg: './src/img/*.{jpg,png}',
   },
   docs: {
-    base: "./docs/",
-    images: "./docs/img/"
-  }
+    base: './docs/',
+    images: './docs/img/',
+  },
 };
 
 function cssTask(done) {
   src(CONFIG.src.sass)
     .pipe(sass())
-    .pipe(rename({ suffix: ".bundle" }))
+    .pipe(rename({ suffix: '.bundle' }))
     .pipe(postcss([autoprefixer(), cssnano()]))
     .pipe(dest(CONFIG.docs.base));
 
@@ -43,23 +43,23 @@ function jsTask(done) {
     .pipe(
       webpackStream({
         output: {
-          filename: "main.js"
+          filename: 'main.js',
         },
         module: {
           rules: [
             {
               test: /\.(js)$/,
               exclude: /(node_modules)/,
-              loader: "babel-loader",
+              loader: 'babel-loader',
               query: {
-                presets: ["@babel/preset-env"]
-              }
-            }
-          ]
-        }
+                presets: ['@babel/preset-env'],
+              },
+            },
+          ],
+        },
       })
     )
-    .pipe(rename({ suffix: ".bundle" }))
+    .pipe(rename({ suffix: '.bundle' }))
     .pipe(uglify())
     .pipe(dest(CONFIG.docs.base));
 
@@ -85,11 +85,11 @@ function imagesTaskWebp(done) {
     .pipe(
       imagemin([
         webp({
-          quality: 75
-        })
+          quality: 75,
+        }),
       ])
     )
-    .pipe(extReplace(".webp"))
+    .pipe(extReplace('.webp'))
     .pipe(dest(CONFIG.docs.images));
   done();
 }
@@ -97,8 +97,8 @@ function imagesTaskWebp(done) {
 function liveReload(done) {
   browserSync.init({
     server: {
-      baseDir: CONFIG.docs.base
-    }
+      baseDir: CONFIG.docs.base,
+    },
   });
   done();
 }
@@ -121,19 +121,19 @@ function watchChanges() {
 
 function createCssLibs() {
   return src([
-    "node_modules/normalize.css/normalize.css",
-    "node_modules/slick-carousel/slick/slick.css",
-    "node_modules/animate.css/animate.css"
+    'node_modules/normalize.css/normalize.css',
+    'node_modules/slick-carousel/slick/slick.css',
+    'node_modules/animate.css/animate.css',
   ])
-    .pipe(concat("_libs.scss"))
-    .pipe(dest("./src/sass/"))
+    .pipe(concat('_libs.scss'))
+    .pipe(dest('./src/sass/'))
     .pipe(browserSync.reload({ stream: true }));
 }
 
 function getJslibs() {
-  return src(["node_modules/slick-carousel/slick/slick.js"])
-    .pipe(concat("libs.min.js"))
-    .pipe(dest("./docs/"))
+  return src(['node_modules/slick-carousel/slick/slick.js'])
+    .pipe(concat('libs.min.js'))
+    .pipe(dest('./docs/'))
     .pipe(uglify())
     .pipe(browserSync.reload({ stream: true }));
 }
