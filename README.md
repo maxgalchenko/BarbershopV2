@@ -77,4 +77,3 @@ Built with ❤️ by [Maksym Galchenko](https://github.com/maxgalchenko)
 ![License](https://img.shields.io/badge/License-MIT-yellow?style=for-the-badge)
 
 </div>
-
