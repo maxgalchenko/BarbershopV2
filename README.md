@@ -64,7 +64,7 @@ Open http://localhost:3000
 
 ## Screenshots
 
-![Main](./src/img/screenshots/localhost_3003_%20%282%29.png)
+![Main](<./src/img/screenshots/localhost_3003_ (2).png>)
 
 ![Booking](./src/img/screenshots/localhost_3003_pages_booking.html.png)
 
