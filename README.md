@@ -64,11 +64,11 @@ Open http://localhost:3000
 
 ## Screenshots
 
-![Main](<./src/img/screenshots/localhost_3003_ (2).png>)
+![Main](./src/img/screenshots/localhost_3003_main.html.png)
 
-![Booking](./src/img/screenshots/localhost_3003_pages_booking.html.png)
+![Booking](./src/img/localhost_3003_pages_booking.html.png)
 
-![Photo](./src/img/screenshots/localhost_3003_pages_photo.html.png)
+![Photo](./src/img/localhost_3003_pages_photo.html.png)
 
 ---
 
